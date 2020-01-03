@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Check My IP</title>
+    <style>
+        #ip {
+            text-align: center;
+            text-justify: auto;
+            font-size: x-large;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="ip"></div>
+    <noscript>JavaScript is required</noscript>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    ips = JSON.parse(xhttp.response).origin.split(",");
+                    document.getElementById("ip").innerHTML = ips[0];
+                }
+            };
+            xhttp.open("GET", "https://httpbin.org/ip", true);
+            xhttp.send();
+        });
+    </script>
+</body>
+
+</html>
